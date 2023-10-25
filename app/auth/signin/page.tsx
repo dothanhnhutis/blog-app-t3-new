@@ -12,12 +12,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { Github, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
 import { SigninType } from "@/constants/schema";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { SiGoogle } from "react-icons/si";
+import { BsGithub } from "react-icons/bs";
 
 const SigninPage = () => {
   const router = useRouter();
@@ -70,7 +71,7 @@ const SigninPage = () => {
             <div className="grid w-full items-center gap-4">
               <div className="grid grid-cols-2 gap-6">
                 <Button variant="outline" onClick={() => signIn("github")}>
-                  <Github className="mr-2 h-5 w-5" /> Github
+                  <BsGithub className="mr-2 h-5 w-5" /> Github
                 </Button>
                 <Button variant="outline" onClick={() => signIn("google")}>
                   <SiGoogle className="mr-2 h-5 w-5" />

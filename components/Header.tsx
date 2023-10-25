@@ -5,12 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
@@ -31,37 +27,58 @@ const Header = () => {
             <SheetHeader>
               <Logo className="order-2 sm:order-none" />
             </SheetHeader>
-            <ul className="my-4">
+            <ul className="flex flex-col gap-3 my-4 pb-10">
               <li>
-                <Link prefetch={false} href="/">
+                <Link
+                  href="/"
+                  className="transition-colors hover:text-foreground/80 text-foreground/60"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link prefetch={false} href="/">
+                <Link
+                  href="/"
+                  className="transition-colors hover:text-foreground/80 text-foreground/60"
+                >
                   Blog
                 </Link>
               </li>
               <li>
-                <Link prefetch={false} href="/contacts">
-                  Contact US
+                <Link
+                  href="/"
+                  className="transition-colors hover:text-foreground/80 text-foreground/60"
+                >
+                  Contact Us
                 </Link>
               </li>
             </ul>
           </SheetContent>
         </Sheet>
 
-        <div className="hidden sm:flex items-center space-x-4 ml-4">
-          <Link prefetch={false} href="/">
+        <div className="hidden sm:flex items-center space-x-6 ml-6 text-sm font-medium">
+          <Link
+            prefetch={false}
+            href="/"
+            className="transition-colors hover:text-foreground/80 text-foreground/60"
+          >
             Home
           </Link>
 
-          <Link prefetch={false} href="/">
+          <Link
+            prefetch={false}
+            href="/"
+            className="transition-colors hover:text-foreground/80 text-foreground/60"
+          >
             Blog
           </Link>
 
-          <Link prefetch={false} href="/contacts">
-            Contact US
+          <Link
+            prefetch={false}
+            href="/contacts"
+            className="transition-colors hover:text-foreground/80 text-foreground/60"
+          >
+            Contact Us
           </Link>
         </div>
         <div className="flex sm:flex-1 items-center justify-end order-3 sm:order-none">

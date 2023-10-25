@@ -200,7 +200,7 @@ export const whyToBook: {
       "Khách hàng được trải nghiệm mẫu thử, tuỳ chỉnh theo yêu cầu mong muốn mà không áp dụng thu phí.",
   },
 ];
-import DauGoi from "@/images/dau-goi.jpg";
+import DauGoi from "@/images/bg.jpg";
 import Serum from "@/images/serum.jpg";
 export const products = [
   {
@@ -212,7 +212,7 @@ export const products = [
   {
     id: 2,
     title: "Nước Hoa",
-    image: Serum,
+    image: DauGoi,
     link: "",
   },
   // {
