@@ -6,7 +6,7 @@ import { router } from "./trpc";
 export const appRouter = router({
   otps: otpRouter,
   users: userRouter,
-  // posts: postRouter,
+  posts: postRouter,
 });
 
 export type AppRouter = typeof appRouter;

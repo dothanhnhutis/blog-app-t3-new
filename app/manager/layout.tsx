@@ -13,7 +13,7 @@ const ManagerLayout = async ({ children }: { children: React.ReactNode }) => {
     return redirect("/auth/signin");
   }
   return (
-    <div className="h-screen overflow-y-scroll">
+    <div className="h-screen overflow-hidden">
       <header className="sticky top-0 z-50 border-b backdrop-blur bg-background/60">
         <nav className="flex justify-between items-center p-2 pr-4 ">
           <Logo />
@@ -42,8 +42,12 @@ const ManagerLayout = async ({ children }: { children: React.ReactNode }) => {
         </nav>
       </header>
       <div className="flex h-[calc(100vh_-_73px)]">
-        <div className="">sdsd</div>
-        <div>sds</div>
+        <SideBar />
+        <div className="flex-auto overflow-scroll">
+          <div className="xl:max-w-7xl xl:mx-auto px-6 pb-16 pt-3">
+            {children}
+          </div>
+        </div>
       </div>
     </div>
   );

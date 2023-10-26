@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -29,12 +29,6 @@ const SigninPage = () => {
   });
   const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
-
-  useEffect(() => {
-    if (isError) {
-      setIsError(false);
-    }
-  }, [form]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -92,9 +86,10 @@ const SigninPage = () => {
                 <Label htmlFor="email">Email</Label>
                 <Input
                   value={form.email}
-                  onChange={(e) =>
-                    setForm((prev) => ({ ...prev, email: e.target.value }))
-                  }
+                  onChange={(e) => {
+                    setForm((prev) => ({ ...prev, email: e.target.value }));
+                    setIsError(false);
+                  }}
                   id="email"
                   placeholder="example@gmail.com"
                 />
@@ -104,9 +99,13 @@ const SigninPage = () => {
                 <div className="flex p-2 border rounded-md overflow-hidden space-x-2">
                   <input
                     value={form.password}
-                    onChange={(e) =>
-                      setForm((prev) => ({ ...prev, password: e.target.value }))
-                    }
+                    onChange={(e) => {
+                      setForm((prev) => ({
+                        ...prev,
+                        password: e.target.value,
+                      }));
+                      setIsError(false);
+                    }}
                     type={isHiddenPassword ? "password" : "text"}
                     className="flex-grow outline-none bg-transparent"
                     id="password"

@@ -57,3 +57,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 12px;
+}
+
+.tiptap.ProseMirror {
+  outline: none;
+  height: 100%;
+}

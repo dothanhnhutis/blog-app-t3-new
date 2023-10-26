@@ -18,7 +18,7 @@ import { BsGithub } from "react-icons/bs";
 import { PiEyeClosedBold, PiEyeBold } from "react-icons/pi";
 import { AiOutlineCheck } from "react-icons/ai";
 import { Loader2 } from "lucide-react";
-import { classNames } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import useCountDown from "@/hook/useCountDown";
 import { trpc } from "@/app/_trpc/client";
 import { SignupType, signupSchema } from "@/constants/schema";
@@ -185,7 +185,7 @@ const SignupPage = () => {
                   </button>
                 </div>
                 <div
-                  className={classNames(
+                  className={cn(
                     onfocusAt === "password" || form.password.length > 0
                       ? "flex flex-col"
                       : "hidden"
@@ -195,7 +195,7 @@ const SignupPage = () => {
                     Your password must include:
                   </p>
                   <p
-                    className={classNames(
+                    className={cn(
                       "inline-flex space-x-2 items-center text-gray-500",
                       handleErrorValidateForm(["too_small", "too_big"])
                         ? ""
@@ -208,7 +208,7 @@ const SignupPage = () => {
                     </span>
                   </p>
                   <p
-                    className={classNames(
+                    className={cn(
                       "inline-flex space-x-2 items-center text-gray-500",
                       handleErrorValidateForm(["format_error"])
                         ? ""

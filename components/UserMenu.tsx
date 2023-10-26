@@ -14,14 +14,16 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { SessionInterface } from "@/common.type";
 import { signOut } from "next-auth/react";
 import { Skeleton } from "./ui/skeleton";
+import AvatarDefault from "@/images/user-1.jpg";
 
-const UserMenu = ({ session }: { session: SessionInterface }) => {
-  console.log(session);
+const UserMenu = ({ session }: { session?: SessionInterface }) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className="outline-none">
         <Avatar>
-          <AvatarImage src={session.user.userPreference.avatarUrl} />
+          <AvatarImage
+            src={session?.user?.userPreference?.avatarUrl ?? AvatarDefault.src}
+          />
           <AvatarFallback className="bg-transparent">
             <Skeleton className="h-10 w-10 rounded-full" />
           </AvatarFallback>
@@ -30,20 +32,26 @@ const UserMenu = ({ session }: { session: SessionInterface }) => {
       <DropdownMenuContent align="end" className="max-w-[360px]">
         <DropdownMenuLabel className="flex items-center gap-3">
           <Avatar className="w-24 h-24">
-            <AvatarImage src={session.user.userPreference.avatarUrl} />
+            <AvatarImage
+              src={
+                session?.user?.userPreference?.avatarUrl ?? AvatarDefault.src
+              }
+            />
             <AvatarFallback className="bg-transparent">
               <Skeleton className="w-24 h-24 rounded-full" />
             </AvatarFallback>
           </Avatar>
           <div className="w-full overflow-hidden">
-            <p className="font-medium text-lg">123213</p>
+            <p className="font-medium text-lg">
+              {session?.user?.userPreference?.username ?? "error"}
+            </p>
             <p className="font-light text-sm text-gray-500">
-              {`${session.user.role ?? ""}`}
+              {`${session?.user?.role ?? "error"}`}
             </p>
             <div className="flex items-center space-x-2 text-gray-500 w-full">
               <Mail size={16} />
               <p className="text-sm truncate">{`${
-                session.user.email ?? ""
+                session?.user?.email ?? "error"
               }`}</p>
             </div>
           </div>
