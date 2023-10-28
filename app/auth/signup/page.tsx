@@ -99,7 +99,7 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-[calc(100vh_-_73px)] -translate-y-[73px]">
+    <div className="flex items-center justify-center h-[calc(100vh_-_73px)] -translate-y-[40px]">
       <Card className="w-[400px]">
         <CardHeader>
           <CardTitle>Create an account</CardTitle>
@@ -111,10 +111,10 @@ const SignupPage = () => {
           <CardContent>
             <div className="grid w-full items-center gap-4">
               <div className="grid grid-cols-2 gap-6">
-                <Button variant="outline" onClick={() => signIn("google")}>
+                <Button variant="outline" onClick={() => signIn("github")}>
                   <BsGithub className="mr-2 h-5 w-5" /> Github
                 </Button>
-                <Button variant="outline" onClick={() => signIn("github")}>
+                <Button variant="outline" onClick={() => signIn("google")}>
                   <SiGoogle className="mr-2 h-5 w-5" />
                   Google
                 </Button>

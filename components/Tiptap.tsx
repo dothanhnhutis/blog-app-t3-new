@@ -4,7 +4,7 @@ import { Skeleton } from "./ui/skeleton";
 
 const Tiptap = ({ editor }: { editor: Editor | null }) => {
   return (
-    <div className="p-4 border rounded-lg ">
+    <div className="p-4 border rounded-lg">
       <ToolBar editor={editor} />
       {editor ? (
         <EditorContent
