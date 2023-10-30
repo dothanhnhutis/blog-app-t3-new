@@ -5,7 +5,7 @@ import PostForm from "@/components/PostForm";
 
 const CreatePostPage = () => {
   return (
-    <div>
+    <>
       <div className="relative bg-[#ecf2ff] dark:bg-primary-foreground rounded-xl overflow-hidden px-[25px] pt-[30px] pb-5 mb-6">
         <h4 className="font-semibold text-2xl">Blog app</h4>
         <h6 className="font-normal text-lg">Create new post now</h6>
@@ -14,7 +14,7 @@ const CreatePostPage = () => {
         </div>
       </div>
       <PostForm />
-    </div>
+    </>
   );
 };
 

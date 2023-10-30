@@ -21,7 +21,13 @@ import Image from "@tiptap/extension-image";
 import slug from "slugify";
 
 import { useEditor } from "@tiptap/react";
-import { Check, ChevronsUpDown, ImagePlusIcon } from "lucide-react";
+import {
+  Check,
+  ChevronsUpDown,
+  ImagePlusIcon,
+  LockIcon,
+  UnlockIcon,
+} from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import {
   Command,
@@ -31,6 +37,8 @@ import {
   CommandItem,
 } from "./ui/command";
 import { cn } from "@/lib/utils";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Skeleton } from "./ui/skeleton";
 
 const frameworks = [
   {
@@ -52,6 +60,21 @@ const frameworks = [
   {
     value: "astro",
     label: "Astro",
+  },
+];
+
+const frameworks1 = [
+  {
+    name: "ThanhNhut",
+    email: "dothanhnhutis@gmail.com",
+    image: "https://avatars.githubusercontent.com/u/62380954?v=4",
+    id: "ae29363d-4eff-462e-827f-7cf5dfd1392a",
+  },
+  {
+    name: "ThanhNhut1",
+    email: "dothanhnhutis1@gmail.com",
+    image: "https://avatars.githubusercontent.com/u/62380954?v=4",
+    id: "ae29363d-4eff-462e-827f-7cf5dfd1392b",
   },
 ];
 
@@ -122,6 +145,11 @@ const PostForm = () => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
 
+  const [open1, setOpen1] = React.useState(false);
+  const [value1, setValue1] = React.useState(
+    "ae29363d-4eff-462e-827f-7cf5dfd1392a"
+  );
+
   return (
     <Card>
       <CardHeader>
@@ -130,101 +158,203 @@ const PostForm = () => {
       </CardHeader>
       <CardContent>
         <form>
-          <div className="grid sm:grid-cols-3 sm:grid-rows-4  w-full gap-4">
+          <div className="grid sm:grid-cols-2 w-full gap-4">
             <Label
-              htmlFor="file"
-              className="sm:row-span-4 border-2 border-dashed w-full h-[200px] sm:h-full rounded-lg flex items-center justify-center cursor-pointer"
+              htmlFor="thumnail"
+              className="h-[200px] sm:h-auto text-muted-foreground border-2 border-dashed w-full rounded-lg flex items-center justify-center cursor-pointer"
             >
               <div>
                 <ImagePlusIcon className="w-14 h-14" />
                 <p>Thumnail</p>
               </div>
 
-              <input type="file" name="file" id="file" className="hidden" />
+              <input
+                type="file"
+                name="thumnail"
+                id="thumnail"
+                className="hidden"
+              />
             </Label>
-            <div className="sm:col-span-2 flex flex-col space-y-1.5">
-              <Label htmlFor="name">Name</Label>
-              <Input
-                id="name"
-                name="name"
-                value={data.name}
-                onChange={handleOnchange}
-                className="focus-visible:ring-transparent "
-                placeholder="Name of your project"
-              />
-            </div>
-            <div className="sm:col-span-2 flex flex-col space-y-1.5">
-              <Label htmlFor="slug">Slug</Label>
-              <Input
-                disabled={!editable}
-                id="slug"
-                name="slug"
-                value={data.slug}
-                onChange={handleOnchange}
-                className="focus-visible:ring-transparent "
-                placeholder="Name of your project"
-              />
-            </div>
-            <div className="sm:col-span-2 flex flex-col space-y-1.5">
-              <Label htmlFor="category">Category</Label>
-              <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  value={data.name}
+                  onChange={handleOnchange}
+                  className="focus-visible:ring-transparent "
+                  placeholder="Name of your project"
+                />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="slug">Slug</Label>
+                <div className="flex gap-2">
+                  <Input
+                    disabled={!editable}
+                    id="slug"
+                    name="slug"
+                    value={data.slug}
+                    onChange={handleOnchange}
+                    className="focus-visible:ring-transparent "
+                    placeholder="Name of your project"
+                  />
                   <Button
-                    variant="outline"
-                    role="combobox"
-                    aria-expanded={open}
-                    className="w-[200px] justify-between"
+                    type="button"
+                    variant="secondary"
+                    onClick={() => setEditable(!editable)}
                   >
-                    {value
-                      ? frameworks.find(
-                          (framework) => framework.value === value
-                        )?.label
-                      : "Select framework..."}
-                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    {editable ? (
+                      <UnlockIcon className="w-4 h-4" />
+                    ) : (
+                      <LockIcon className="w-4 h-4" />
+                    )}
                   </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-[200px] p-0">
-                  <Command>
-                    <CommandInput placeholder="Search framework..." />
-                    <CommandEmpty>No framework found.</CommandEmpty>
-                    <CommandGroup>
-                      {frameworks.map((framework) => (
-                        <CommandItem
-                          key={framework.value}
-                          value={framework.value}
-                          onSelect={(currentValue) => {
-                            setValue(
-                              currentValue === value ? "" : currentValue
-                            );
-                            setOpen(false);
-                          }}
-                        >
+                </div>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="category">Category</Label>
+                <Popover open={open} onOpenChange={setOpen}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      aria-expanded={open}
+                      className="justify-between"
+                    >
+                      {value
+                        ? frameworks.find(
+                            (framework) => framework.value === value
+                          )?.label
+                        : "Select framework..."}
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="p-0 ">
+                    <Command>
+                      <CommandInput placeholder="Search framework..." />
+                      <CommandEmpty>No framework found.</CommandEmpty>
+                      <CommandGroup className="max-h-[200px] overflow-scroll">
+                        <CommandItem>
                           <Check
                             className={cn(
                               "mr-2 h-4 w-4",
-                              value === framework.value
-                                ? "opacity-100"
-                                : "opacity-0"
+                              true ? "opacity-100" : "opacity-0"
                             )}
                           />
-                          {framework.label}
+                          sdsd
                         </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </Command>
-                </PopoverContent>
-              </Popover>
-            </div>
-            <div className="sm:col-span-2 flex flex-col space-y-1.5">
-              <Label htmlFor="category">Author</Label>
-              <Input
-                id="category"
-                name="category"
-                value={data.category}
-                onChange={handleOnchange}
-                className="focus-visible:ring-transparent "
-                placeholder="Name of your project"
-              />
+                        {frameworks.map((framework) => (
+                          <CommandItem
+                            key={framework.value}
+                            value={framework.value}
+                            onSelect={(currentValue) => {
+                              setValue(
+                                currentValue === value ? "" : currentValue
+                              );
+                              setOpen(false);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                value === framework.value
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {framework.label}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="category">Author</Label>
+                <Popover open={open1} onOpenChange={setOpen1}>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant="outline"
+                      role="combobox"
+                      aria-expanded={open}
+                      className="justify-between h-auto"
+                    >
+                      <div className="flex gap-2 overflow-hidden">
+                        <Avatar>
+                          <AvatarImage
+                            sizes=""
+                            src="https://github.com/shadcn.png"
+                            alt="@shadcn"
+                          />
+                          <Skeleton className="h-12 w-12 rounded-full" />
+                        </Avatar>
+                        <div className="text-start w-full overflow-hidden">
+                          <p className="truncate">Thanh Nhut</p>
+                          <p className="text-sm text-muted-foreground truncate">
+                            dothanhnhis@gmail.com
+                          </p>
+                        </div>
+                      </div>
+
+                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="p-0">
+                    <Command>
+                      <CommandInput placeholder="Search framework..." />
+                      <CommandEmpty>No framework found.</CommandEmpty>
+                      <CommandGroup className="max-w-full overflow-y-scroll">
+                        <CommandItem className="justify-between gap-2">
+                          <Avatar>
+                            <AvatarImage
+                              sizes=""
+                              src="https://github.com/shadcn.png"
+                              alt="@shadcn"
+                            />
+                            <Skeleton className="h-12 w-12 rounded-full" />
+                          </Avatar>
+                          <div className="w-full overflow-hidden">
+                            <p className="truncate">Thanh Nhut</p>
+                            <p className="text-sm text-muted-foreground truncate">
+                              dothanhnhis@gmail.com
+                            </p>
+                          </div>
+                          <Check
+                            className={cn(
+                              "flex flex-shrink-0 h-4 w-4",
+                              true ? "opacity-100" : "opacity-0"
+                            )}
+                          />
+                        </CommandItem>
+                        {frameworks1.map((framework1) => (
+                          <CommandItem
+                            key={framework1.id}
+                            value={framework1.id}
+                            onSelect={(currentValue) => {
+                              setValue1(
+                                currentValue === value ? "" : currentValue
+                              );
+                              setOpen1(false);
+                            }}
+                          >
+                            <Check
+                              className={cn(
+                                "mr-2 h-4 w-4",
+                                value === framework1.id
+                                  ? "opacity-100"
+                                  : "opacity-0"
+                              )}
+                            />
+                            {framework1.name}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+              </div>
             </div>
           </div>
           <div className="flex flex-col space-y-1.5 mt-4">
